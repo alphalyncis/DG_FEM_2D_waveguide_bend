@@ -1,5 +1,3 @@
-nn=3;
-
 M_all=zeros(Nel,3,3);       N_all=zeros(Nel,3,3);
 
 for ei=1:1:Nel % ei=element index, nd=node, in=index
@@ -26,80 +24,25 @@ for ei=1:1:Nel % ei=element index, nd=node, in=index
         yDuf=y1+(y2-y1)*ksiDuf+(y3-y2)*ksiDuf*etaDuf;
         wwKsi2A=wwDuf*ksiDuf*2*areatr;
         
-        M_all(ei,1,1)=M_all(ei,1,1)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(a1+b1*xDuf+c1*yDuf);
-        M_all(ei,1,2)=M_all(ei,1,2)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(a2+b2*xDuf+c2*yDuf);
-        M_all(ei,1,3)=M_all(ei,1,3)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(a3+b3*xDuf+c3*yDuf);
-        M_all(ei,2,1)=M_all(ei,2,1)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(a1+b1*xDuf+c1*yDuf);
-        M_all(ei,2,2)=M_all(ei,2,2)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(a2+b2*xDuf+c2*yDuf);
-        M_all(ei,2,3)=M_all(ei,2,3)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(a3+b3*xDuf+c3*yDuf);
-        M_all(ei,3,1)=M_all(ei,3,1)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(a1+b1*xDuf+c1*yDuf);
-        M_all(ei,3,2)=M_all(ei,3,2)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(a2+b2*xDuf+c2*yDuf);
-        M_all(ei,3,3)=M_all(ei,3,3)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(a3+b3*xDuf+c3*yDuf);
+        M_all(ei,1,1)=M_all(ei,1,1)+wwKsi2A*c^2*(1/(4*areatr^2))*(b1^2+c1^2);
+        M_all(ei,2,2)=M_all(ei,2,2)+wwKsi2A*c^2*(1/(4*areatr^2))*(b2^2+c2^2);
+        M_all(ei,3,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b3^2+c3^2);
+        M_all(ei,1,2)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b1*b2+c1*c2);
+        M_all(ei,1,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b3*b1+c3*c1);
+        M_all(ei,2,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b2*b3+c2*c3);
+        M_all(ei,2,1)=M_all(ei,1,2);
+        M_all(ei,3,1)=M_all(ei,1,3);
+        M_all(ei,3,2)=M_all(ei,2,3);
         
-        N2_all(ei,1,1)=N2_all(ei,1,1)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(c1)*xDuf;
-        N2_all(ei,1,2)=N2_all(ei,1,2)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(c2)*xDuf;
-        N2_all(ei,1,3)=N2_all(ei,1,3)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(c3)*xDuf;
-        N2_all(ei,2,1)=N2_all(ei,2,1)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(c1)*xDuf;
-        N2_all(ei,2,2)=N2_all(ei,2,2)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(c2)*xDuf;
-        N2_all(ei,2,3)=N2_all(ei,2,3)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(c3)*xDuf;
-        N2_all(ei,3,1)=N2_all(ei,3,1)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(c1)*xDuf;
-        N2_all(ei,3,2)=N2_all(ei,3,2)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(c2)*xDuf;
-        N2_all(ei,3,3)=N2_all(ei,3,3)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(c3)*xDuf;
+        N_all(ei,1,1)=N_all(ei,1,1)+wwKsi2A*(1/(4*areatr^2))*(a1+b1*xDuf+c1*yDuf)*(a1+b1*xDuf+c1*yDuf);
+        N_all(ei,1,2)=N_all(ei,1,2)+wwKsi2A*(1/(4*areatr^2))*(a1+b1*xDuf+c1*yDuf)*(a2+b2*xDuf+c2*yDuf);
+        N_all(ei,1,3)=N_all(ei,1,3)+wwKsi2A*(1/(4*areatr^2))*(a1+b1*xDuf+c1*yDuf)*(a3+b3*xDuf+c3*yDuf);
+        N_all(ei,2,1)=N_all(ei,2,1)+wwKsi2A*(1/(4*areatr^2))*(a2+b2*xDuf+c2*yDuf)*(a1+b1*xDuf+c1*yDuf);
+        N_all(ei,2,2)=N_all(ei,2,2)+wwKsi2A*(1/(4*areatr^2))*(a2+b2*xDuf+c2*yDuf)*(a2+b2*xDuf+c2*yDuf);
+        N_all(ei,2,3)=N_all(ei,2,3)+wwKsi2A*(1/(4*areatr^2))*(a2+b2*xDuf+c2*yDuf)*(a3+b3*xDuf+c3*yDuf);
+        N_all(ei,3,1)=N_all(ei,3,1)+wwKsi2A*(1/(4*areatr^2))*(a3+b3*xDuf+c3*yDuf)*(a1+b1*xDuf+c1*yDuf);
+        N_all(ei,3,2)=N_all(ei,3,2)+wwKsi2A*(1/(4*areatr^2))*(a3+b3*xDuf+c3*yDuf)*(a2+b2*xDuf+c2*yDuf);
+        N_all(ei,3,3)=N_all(ei,3,3)+wwKsi2A*(1/(4*areatr^2))*(a3+b3*xDuf+c3*yDuf)*(a3+b3*xDuf+c3*yDuf);
         
-        N1_all(ei,1,1)=N1_all(ei,1,1)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(b1)*yDuf;
-        N1_all(ei,1,2)=N1_all(ei,1,2)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(b2)*yDuf;
-        N1_all(ei,1,3)=N1_all(ei,1,3)+wwKsi2A*(1/(4*areatr*areatr))*(a1+b1*xDuf+c1*yDuf)*(b3)*yDuf;
-        N1_all(ei,2,1)=N1_all(ei,2,1)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(b1)*yDuf;
-        N1_all(ei,2,2)=N1_all(ei,2,2)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(b2)*yDuf;
-        N1_all(ei,2,3)=N1_all(ei,2,3)+wwKsi2A*(1/(4*areatr*areatr))*(a2+b2*xDuf+c2*yDuf)*(b3)*yDuf;
-        N1_all(ei,3,1)=N1_all(ei,3,1)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(b1)*yDuf;
-        N1_all(ei,3,2)=N1_all(ei,3,2)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(b2)*yDuf;
-        N1_all(ei,3,3)=N1_all(ei,3,3)+wwKsi2A*(1/(4*areatr*areatr))*(a3+b3*xDuf+c3*yDuf)*(b3)*yDuf;
-        
-        F_all(1,ei)=F_all(1,ei)+wwKsi2A*(1/(2*areatr))*(a1+b1*xDuf+c1*yDuf);
-        F_all(2,ei)=F_all(2,ei)+wwKsi2A*(1/(2*areatr))*(a2+b2*xDuf+c2*yDuf);
-        F_all(3,ei)=F_all(3,ei)+wwKsi2A*(1/(2*areatr))*(a3+b3*xDuf+c3*yDuf); 
-    end
-    
-    % for edge1
-    l_x1=x1;    l_y1=y1;    l_x2=x2;    l_y2=y2;
-    lLine=sqrt((l_x1-l_x2)^2+(l_y1-l_y2)^2);
-    for ji=1:1:Nline
-        ksiDuf=NumQuadPoints(ji,1);     wwDuf=NumQuadPoints(ji,2);
-        xLine=(l_x2-l_x1)*ksiDuf+l_x1;
-        yLine=(l_y2-l_y1)*ksiDuf+l_y1;
-        wwLine=wwDuf*lLine;
-
-        Fe1_all(1,ei)=Fe1_all(1,ei)+wwLine*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-        Fe1_all(2,ei)=Fe1_all(2,ei)+wwLine*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-        Fe1_all(3,ei)=Fe1_all(3,ei)+wwLine*(1/(2*areatr))*(a3+b3*xLine+c3*yLine); 
-    end
-
-    % for edge2
-    l_x1=x2;    l_y1=y2;    l_x2=x3;    l_y2=y3;
-    lLine=sqrt((l_x1-l_x2)^2+(l_y1-l_y2)^2);
-    for ji=1:1:Nline
-        ksiDuf=NumQuadPoints(ji,1);     wwDuf=NumQuadPoints(ji,2);
-        xLine=(l_x2-l_x1)*ksiDuf+l_x1;
-        yLine=(l_y2-l_y1)*ksiDuf+l_y1;
-        wwLine=wwDuf*lLine;
-                
-        Fe2_all(1,ei)=Fe2_all(1,ei)+wwLine*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-        Fe2_all(2,ei)=Fe2_all(2,ei)+wwLine*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-        Fe2_all(3,ei)=Fe2_all(3,ei)+wwLine*(1/(2*areatr))*(a3+b3*xLine+c3*yLine); 
-    end
-    
-    % for edge3
-    l_x1=x3;    l_y1=y3;    l_x2=x1;    l_y2=y1;
-    lLine=sqrt((l_x1-l_x2)^2+(l_y1-l_y2)^2);
-    for ji=1:1:Nline
-        ksiDuf=NumQuadPoints(ji,1);     wwDuf=NumQuadPoints(ji,2);
-        xLine=(l_x2-l_x1)*ksiDuf+l_x1;
-        yLine=(l_y2-l_y1)*ksiDuf+l_y1;
-        wwLine=wwDuf*lLine;
-                
-        Fe3_all(1,ei)=Fe3_all(1,ei)+wwLine*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-        Fe3_all(2,ei)=Fe3_all(2,ei)+wwLine*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-        Fe3_all(3,ei)=Fe3_all(3,ei)+wwLine*(1/(2*areatr))*(a3+b3*xLine+c3*yLine); 
     end
 end
