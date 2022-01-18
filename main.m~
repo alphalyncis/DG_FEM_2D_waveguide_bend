@@ -37,7 +37,7 @@ axis on;
 
 matrix_assembly;
 dt=0.05e-6;       %% dt=0.005/pi/2 is sufficiently fine and good.
-Nt=10;
+Nt=3;
 
 Ez_el=zeros(Nel,Nt);
 Ez_all=zeros(3,Nel,Nt);

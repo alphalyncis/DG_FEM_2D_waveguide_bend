@@ -37,7 +37,7 @@ axis on;
 
 matrix_assembly;
 dt=0.05e-6;       %% dt=0.005/pi/2 is sufficiently fine and good.
-Nt=10;
+Nt=3;
 
 Ez_el=zeros(Nel,Nt);
 Ez_all=zeros(3,Nel,Nt);
@@ -51,35 +51,38 @@ plot_Ez;
 drawnow;
 hold on;
 %% main time loop
-for tIn=2:1:Nt
-    tnow=dt*(tIn-1);
-    for ei=1:1:Nel
-        %A=zeros(3,3); b=zeros(3,1);
-        M=squeeze(M_all(ei,:,:));       N=squeeze(N_all(ei,:,:));     
-        %F1=squeeze(Fe1_all(:,ei));      F2=squeeze(Fe2_all(:,ei));      F3=squeeze(Fe3_all(:,ei));
-        element_info_lin;
-        edge_condition;        
-        edge_contribution; % add the matrix contribution of the edges
-        
-        % solve locally
-        left_ei=(1/dt).*M;
-        right_ei=(1/dt).*(M*u_allRK(:,ei,tIn-1))+2*pi.*((N1-N2)*u_allRK(:,ei,tIn-1))+(K1_e1+K1_e2+K1_e3)+(K2_e1+K2_e2+K2_e3);
-        temp_u=left_ei\right_ei;
-
-        limit_slope_lin;
-
-        % calc field value of the element from the 3 nodal values weighted by Ni
-        Ez_el(ei,tIn)=(1/(2*areatr))*(u_allRK(1,ei,tIn)*(a1+b1*cx+c1*cy)+u_allRK(2,ei,tIn)*(a2+b2*cx+c2*cy)+u_allRK(3,ei,tIn)*(a3+b3*cx+c3*cy));
-    end
-    
-    [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,1)), min(Ez_el(:,tIn))]
-
-    if (mod(tIn,2)==0)
-        plot_rotatingHill;
-        drawnow;
-        hold on;
-    end
+% for tIn=2:1:Nt
+%     tnow=dt*(tIn-1);
+for ei=1:1:Nel
+    %A=zeros(3,3); b=zeros(3,1);
+    M=squeeze(M_all(ei,:,:));       N=squeeze(N_all(ei,:,:));     
+    %F1=squeeze(Fe1_all(:,ei));      F2=squeeze(Fe2_all(:,ei));      F3=squeeze(Fe3_all(:,ei));
+    element_info_lin;
+    edge_condition;
+    edge_contribution; % add the matrix contribution of the edges
 end
+
+%         edge_contribution; % add the matrix contribution of the edges
+%         
+%         % solve locally
+%         left_ei=(1/dt).*M;
+%         right_ei=(1/dt).*(M*u_allRK(:,ei,tIn-1))+2*pi.*((N1-N2)*u_allRK(:,ei,tIn-1))+(K1_e1+K1_e2+K1_e3)+(K2_e1+K2_e2+K2_e3);
+%         temp_u=left_ei\right_ei;
+% 
+%         limit_slope_lin;
+% 
+%         % calc field value of the element from the 3 nodal values weighted by Ni
+%         Ez_el(ei,tIn)=(1/(2*areatr))*(u_allRK(1,ei,tIn)*(a1+b1*cx+c1*cy)+u_allRK(2,ei,tIn)*(a2+b2*cx+c2*cy)+u_allRK(3,ei,tIn)*(a3+b3*cx+c3*cy));
+%     end
+%     
+%     [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,1)), min(Ez_el(:,tIn))]
+% 
+%     if (mod(tIn,2)==0)
+%         plot_rotatingHill;
+%         drawnow;
+%         hold on;
+%     end
+% end
 % 
 % 
 % plot_rotatingHill;

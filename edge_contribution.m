@@ -1,7 +1,8 @@
 temp_u=zeros(3,1);
 
 % for edge1
-K1_e1=zeros(3,1); K2_e1=zeros(3,1);
+K_e1=zeros(3,1);
+b_el=zeros(3,1);
 l_nd1x=nd1x;    l_nd1y=nd1y;    l_nd2x=nd2x;    l_nd2y=nd2y;
 lLine=sqrt((l_nd1x-l_nd2x)^2+(l_nd1y-l_nd2y)^2); % edge length
 for ji=1:1:Nline % integration sampling points
