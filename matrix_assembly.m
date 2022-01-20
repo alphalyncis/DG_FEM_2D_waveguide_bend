@@ -24,12 +24,12 @@ for ei=1:1:Nel % ei=element index, nd=node, in=index
         yDuf=y1+(y2-y1)*ksiDuf+(y3-y2)*ksiDuf*etaDuf;
         wwKsi2A=wwDuf*ksiDuf*2*areatr;
         
-        M_all(ei,1,1)=M_all(ei,1,1)+wwKsi2A*c^2*(1/(4*areatr^2))*(b1^2+c1^2);
-        M_all(ei,2,2)=M_all(ei,2,2)+wwKsi2A*c^2*(1/(4*areatr^2))*(b2^2+c2^2);
-        M_all(ei,3,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b3^2+c3^2);
-        M_all(ei,1,2)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b1*b2+c1*c2);
-        M_all(ei,1,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b3*b1+c3*c1);
-        M_all(ei,2,3)=M_all(ei,3,3)+wwKsi2A*c^2*(1/(4*areatr^2))*(b2*b3+c2*c3);
+        M_all(ei,1,1)=M_all(ei,1,1)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b1^2+c1^2);
+        M_all(ei,2,2)=M_all(ei,2,2)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b2^2+c2^2);
+        M_all(ei,3,3)=M_all(ei,3,3)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b3^2+c3^2);
+        M_all(ei,1,2)=M_all(ei,3,3)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b1*b2+c1*c2);
+        M_all(ei,1,3)=M_all(ei,3,3)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b3*b1+c3*c1);
+        M_all(ei,2,3)=M_all(ei,3,3)+wwKsi2A*c0*c0*(1/(4*areatr^2))*(b2*b3+c2*c3);
         M_all(ei,2,1)=M_all(ei,1,2);
         M_all(ei,3,1)=M_all(ei,1,3);
         M_all(ei,3,2)=M_all(ei,2,3);
