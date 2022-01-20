@@ -13,15 +13,15 @@ if edge_type(ed3in)==1
     Ez3_x=(1/(2*areatrng3))*(b1ng3*Ez_all(1,ngEl_ed3,tIn-1)+b2ng3*Ez_all(2,ngEl_ed3,tIn-1)+b3ng3*Ez_all(3,ngEl_ed3,tIn-1));
     Ez3_y=(1/(2*areatrng3))*(c1ng3*Ez_all(1,ngEl_ed3,tIn-1)+c2ng3*Ez_all(2,ngEl_ed3,tIn-1)+c3ng3*Ez_all(3,ngEl_ed3,tIn-1));
 end
-if edge_type(ed1in)==2
+if edge_type(ed1in)~=1
     Ez1_x=Ez0_x;
     Ez1_y=Ez0_y;
 end
-if edge_type(ed2in)==2
+if edge_type(ed2in)~=1
     Ez2_x=Ez0_x;
     Ez2_y=Ez0_y;
 end
-if edge_type(ed3in)==2
+if edge_type(ed3in)~=1
     Ez3_x=Ez0_x;
     Ez3_y=Ez0_y;
 end

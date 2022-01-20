@@ -23,7 +23,7 @@ E0=sqrt(2)*sqrt(2*omega*mu0/(kx*d));    % Normalized input signal:Pin=1
 solver=1;                   % 1 - sparse matrix solver; 2 - GMRES iterative solver
 
 [x_min_bc,y_min_bc,y_max_bc,x_max_bc]=find_boundaries(Nnodes,x_no,y_no);
-boundary_nodes; % excludes the input and output ports from boundary nodes
+%boundary_nodes; % excludes the input and output ports from boundary nodes
 
 % Plot mesh and boundary nodes
 figure(1);
@@ -36,16 +36,14 @@ bcs_plot;
 axis on;
 
 matrix_assembly;
-dt=0.01e-9;       %% dt=0.005/pi/2 is sufficiently fine and good.
-Nt=100;
+dt=0.01e-9;
+Nt=50;
 
 Ez_el=zeros(Nel,Nt);
 Ez_all=zeros(3,Nel,Nt);
 
 %% initialize
-tIn=1;
-
-% 
+% tIn=1;
 % Ereal_el=real(Ez_el);
 % plot_Ez;
 % drawnow;
@@ -58,13 +56,13 @@ for tIn=3:1:Nt
     for ei=1:1:Nel
         M=squeeze(M_all(ei,:,:));       N=squeeze(N_all(ei,:,:));     
         element_info_lin;
-        edge_condition;
+        edge_condition; % identify edge type (1-inside domain, 2-input port, 3-output port, 4-PEC)
         edge_contribution; % integral contribution of the edges
 
         % solve locally
         % temp_Ez=zeros(3,1);
-        left_ei=(1/dt^2).*(M+N+K_el);
-        right_ei=(2/dt^2).*(N*Ez_all(:,ei,tIn-1))+(1/dt^2).*(N*Ez_all(:,ei,tIn-2))+F_ed1+F_ed2+F_ed3+b_el;
+        left_ei=(1/dt^2).*M + N + K_el;
+        right_ei=(2/dt^2).*(N*Ez_all(:,ei,tIn-1)) + (1/dt^2).*(N*Ez_all(:,ei,tIn-2)) + b_el+F_ed1+F_ed2+F_ed3;
         temp_Ez=left_ei\right_ei;
         
         %Ez_all(:,ei,tIn)=temp_Ez(:,1);
@@ -74,11 +72,11 @@ for tIn=3:1:Nt
         Ez_el(ei,tIn)=(1/(2*areatr))*(Ez_all(1,ei,tIn)*(a1+b1*cx+c1*cy)+Ez_all(2,ei,tIn)*(a2+b2*cx+c2*cy)+Ez_all(3,ei,tIn)*(a3+b3*cx+c3*cy));
     end
     
-    % print results at each time step
-    %count
+    % print results and plot at each time n steps
     if (mod(tIn,10)==0)
         [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,1)), min(Ez_el(:,tIn))] %#ok<NOPTS>
         Ereal_el=real(Ez_el);
+        figure(2)
         plot_Ez;
         drawnow;
         hold on;
@@ -86,29 +84,3 @@ for tIn=3:1:Nt
 end
 
 hold off;
-
-%         edge_contribution; % add the matrix contribution of the edges
-%         
-%         % solve locally
-%         left_ei=(1/dt).*M;
-%         right_ei=(1/dt).*(M*u_allRK(:,ei,tIn-1))+2*pi.*((N1-N2)*u_allRK(:,ei,tIn-1))+(K1_e1+K1_e2+K1_e3)+(K2_e1+K2_e2+K2_e3);
-%         temp_u=left_ei\right_ei;
-% 
-%         limit_slope_lin;
-% 
-%         % calc field value of the element from the 3 nodal values weighted by Ni
-%         Ez_el(ei,tIn)=(1/(2*areatr))*(u_allRK(1,ei,tIn)*(a1+b1*cx+c1*cy)+u_allRK(2,ei,tIn)*(a2+b2*cx+c2*cy)+u_allRK(3,ei,tIn)*(a3+b3*cx+c3*cy));
-%     end
-%     
-%     [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,1)), min(Ez_el(:,tIn))]
-% 
-%     if (mod(tIn,2)==0)
-%         plot_rotatingHill;
-%         drawnow;
-%         hold on;
-%     end
-% end
-% 
-% 
-% plot_rotatingHill;
-% hold off;
