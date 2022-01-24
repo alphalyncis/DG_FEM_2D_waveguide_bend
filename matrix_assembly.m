@@ -45,4 +45,21 @@ for ei=1:1:Nel % ei=element index, nd=node, in=index
         N_all(ei,3,3)=N_all(ei,3,3)+wwKsi2A*(1/(4*areatr^2))*(a3+b3*xDuf+c3*yDuf)*(a3+b3*xDuf+c3*yDuf);
         
     end
+%     
+%     % bcs def
+%     if st_no(nd1in)==1
+%         for j=1:3
+%             M_all(ei,1,j)=0.;
+%         end
+%     end
+%     if st_no(nd2in)==1
+%         for j=1:3
+%             M_all(ei,2,j)=0.;
+%         end
+%     end
+%     if st_no(nd3in)==1
+%         for j=1:3
+%             M_all(ei,3,j)=0.;
+%         end
+%     end
 end

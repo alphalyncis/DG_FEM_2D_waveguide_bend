@@ -76,5 +76,5 @@ end
 
 
 if edge_type(ed1in)==0 || edge_type(ed2in)==0 || edge_type(ed3in)==0
-    display('error in edge conditions')
+    display('error in edge conditions') %#ok<DISPLAYPROG>
 end
