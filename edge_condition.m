@@ -22,7 +22,7 @@ elseif (pos_neighbors(1,2)==ei) && (pos_neighbors(1,1)>0.5) % if neighbour2 is t
     element_info_ng1;
     edge_type(ed1in)=1; % mark edge1 has a neighbor element
 
-elseif ((ngEl_ed1==-1) && (ed1_cond==0)) % either ng 1 or 2 is the element itself, means that this edge is on boundary
+elseif ((ngEl_ed1==-1) && (edge_type(ed1in)==0)) % either ng 1 or 2 is the element itself, so if ngEl_ed1 not assigned, means that this edge is on boundary
     if (abs(nd1x-nd2x)<0.0001 && abs(nd1x-xp)<0.0001) % if edge on input port
         edge_type(ed1in)=2; % mark edge1 is on the input port
     elseif (abs(nd1y-nd2y)<0.0001 && abs(nd1y-yp)<0.0001)

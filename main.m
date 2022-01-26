@@ -36,11 +36,12 @@ bcs_plot;
 axis on;
 
 matrix_assembly;
-dt=0.0001e-9;
-Nt=150;
+dt=0.0002e-9;
+Nt=500;
 
 Ez_el=zeros(Nel,Nt);
 Ez_all=zeros(3,Nel,Nt);
+%Ez_all(1,463,2)=E0;
 
 %% initialize
 % tIn=1;
@@ -53,7 +54,8 @@ Ez_all=zeros(3,Nel,Nt);
 for tIn=3:1:Nt
     tnow=dt*(tIn-1);
     count=0;
-    for ei=Nel:-1:1
+    
+    for ei=1:1:Nel
         M=squeeze(M_all(ei,:,:));       N=squeeze(N_all(ei,:,:));     
         element_info_lin;
         edge_condition; % identify edge type (1-inside domain, 2-input port, 3-output port, 4-PEC)
@@ -62,19 +64,19 @@ for tIn=3:1:Nt
         % solve locally
         % temp_Ez=zeros(3,1);
         left_ei=(1/dt^2).*N + M + (1/dt).*K_el;
-        right_ei=((2/dt^2).*N + (1/dt).*K_el)*Ez_all(:,ei,tIn-1) + (1/dt^2).*(N*Ez_all(:,ei,tIn-2)) + b_el+F_ed1+F_ed2+F_ed3;
+        right_ei=((2/dt^2).*N + (1/dt).*K_el)*Ez_all(:,ei,tIn-1) - (1/dt^2).*(N*Ez_all(:,ei,tIn-2)) + b_el+F_ed1+F_ed2+F_ed3;
         temp_Ez=left_ei\right_ei;
         
         Ez_all(:,ei,tIn)=temp_Ez(:,1);
         %limit_slope_lin;
-        
+        %Ez_all(1,463,tIn)=Ez_all(1,463,tIn)+E0*cos(omega*tnow); % Nr.463
         % calc field value of the element from the 3 nodal values weighted by Ni
         Ez_el(ei,tIn)=(1/(2*areatr))*(Ez_all(1,ei,tIn)*(a1+b1*cx+c1*cy)+Ez_all(2,ei,tIn)*(a2+b2*cx+c2*cy)+Ez_all(3,ei,tIn)*(a3+b3*cx+c3*cy));
     end
     
     % print results and plot at each time n steps
-    if (mod(tIn,5)==0)
-        [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,1)), min(Ez_el(:,tIn))] %#ok<NOPTS>
+    if (mod(tIn,1)==0)
+        [tnow, tIn, max(Ez_el(:,tIn)), max(Ez_el(:,tIn)), min(Ez_el(:,tIn))] %#ok<NOPTS>
         %Ereal_el=real(Ez_el);
         figure(2)
         plot_Ez;

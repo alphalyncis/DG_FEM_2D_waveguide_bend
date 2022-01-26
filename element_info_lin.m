@@ -17,7 +17,6 @@ areatr=0.5*(nd1x*nd2y-nd2x*nd1y+nd2x*nd3y-nd3x*nd2y+nd3x*nd1y-nd1x*nd3y);
 ed1_n_x=-1*(nd1y-nd2y)/sqrt((nd2y-nd1y)*(nd2y-nd1y)+(nd2x-nd1x)*(nd2x-nd1x));    ed1_n_y=-1*(nd2x-nd1x)/sqrt((nd2y-nd1y)*(nd2y-nd1y)+(nd2x-nd1x)*(nd2x-nd1x));
 ed2_n_x=-1*(nd2y-nd3y)/sqrt((nd3y-nd2y)*(nd3y-nd2y)+(nd3x-nd2x)*(nd3x-nd2x));    ed2_n_y=-1*(nd3x-nd2x)/sqrt((nd3y-nd2y)*(nd3y-nd2y)+(nd3x-nd2x)*(nd3x-nd2x));
 ed3_n_x=-1*(nd3y-nd1y)/sqrt((nd1y-nd3y)*(nd1y-nd3y)+(nd1x-nd3x)*(nd1x-nd3x));    ed3_n_y=-1*(nd1x-nd3x)/sqrt((nd1y-nd3y)*(nd1y-nd3y)+(nd1x-nd3x)*(nd1x-nd3x));
-ed1_cond=0;                 ed2_cond=0;                 ed3_cond=0;  %% 0 means not assigned edge, check for error.
 
 % Triangle Parameters
 a1=nd2x*nd3y-nd2y*nd3x;     a2=nd3x*nd1y-nd3y*nd1x;     a3=nd1x*nd2y-nd1y*nd2x;

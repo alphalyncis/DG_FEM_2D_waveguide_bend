@@ -15,7 +15,7 @@ for ei=1:1:Nel % ei=element index, nd=node, in=index
     areatr=0.5*(x1*y2-x2*y1+x2*y3-x3*y2+x3*y1-x1*y3);
     
     if areatr<0
-        display('areatrtr<0?');
+        display('areatrtr<0?'); %#ok<DISPLAYPROG>
     end
         
     for gi=1:1:Nduf % gi=1,2,...,9; summing 9 terms
