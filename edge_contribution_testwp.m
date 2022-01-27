@@ -29,9 +29,9 @@ for ji=1:1:Nline % integration sampling points
     % F = \int{nabla_Ez \dot \vec{n} * Ni dl}
     dot_product=(nabla_Ez_x*ed1_n_x+nabla_Ez_y*ed1_n_y);
     dot_product_2=abs(nabla_Ez_x_2*ed1_n_x+nabla_Ez_y_2*ed1_n_y);
-    F_ed1(1,1)=F_ed1(1,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-    F_ed1(2,1)=F_ed1(2,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-    F_ed1(3,1)=F_ed1(3,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
+    F_ed1(1,1)=F_ed1(1,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
+    F_ed1(2,1)=F_ed1(2,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
+    F_ed1(3,1)=F_ed1(3,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
 end
 
 %% for edge2
@@ -62,9 +62,9 @@ for ji=1:1:Nline % integration sampling points
     % F = \int{nabla_Ez \dot \vec{n} Ni dl}
     dot_product=(nabla_Ez_x*ed1_n_x+nabla_Ez_y*ed1_n_y);
     dot_product_2=abs(nabla_Ez_x_2*ed1_n_x+nabla_Ez_y_2*ed1_n_y);
-    F_ed2(1,1)=F_ed2(1,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-    F_ed2(2,1)=F_ed2(2,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-    F_ed2(3,1)=F_ed2(3,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
+    F_ed2(1,1)=F_ed2(1,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
+    F_ed2(2,1)=F_ed2(2,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
+    F_ed2(3,1)=F_ed2(3,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
 
 end
 
@@ -96,8 +96,8 @@ for ji=1:1:Nline % integration sampling points
     % F = \int{nabla_Ez \dot \vec{n} Ni dl}
     dot_product=(nabla_Ez_x*ed1_n_x+nabla_Ez_y*ed1_n_y);
     dot_product_2=abs(nabla_Ez_x_2*ed1_n_x+nabla_Ez_y_2*ed1_n_y);
-    F_ed3(1,1)=F_ed3(1,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
-    F_ed3(2,1)=F_ed3(2,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
-    F_ed3(3,1)=F_ed3(3,1)+wwLine*c0*c0*(dot_product+dot_product_2)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
+    F_ed3(1,1)=F_ed3(1,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a1+b1*xLine+c1*yLine);
+    F_ed3(2,1)=F_ed3(2,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a2+b2*xLine+c2*yLine);
+    F_ed3(3,1)=F_ed3(3,1)+wwLine*c0*c0*(dot_product)*(1/(2*areatr))*(a3+b3*xLine+c3*yLine);
 
 end

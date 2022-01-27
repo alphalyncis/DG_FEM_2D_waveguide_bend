@@ -37,7 +37,7 @@ axis on;
 
 matrix_assembly;
 dt=0.0002e-9;
-Nt=500;
+Nt=50;
 
 Ez_el=zeros(Nel,Nt);
 Ez_all=zeros(3,Nel,Nt);
@@ -59,7 +59,7 @@ for tIn=3:1:Nt
         M=squeeze(M_all(ei,:,:));       N=squeeze(N_all(ei,:,:));     
         element_info_lin;
         edge_condition; % identify edge type (1-inside domain, 2-input port, 3-output port, 4-PEC)
-        edge_contribution; % integral contribution of the edges
+        edge_contribution_testwp; % integral contribution of the edges
 
         % solve locally
         % temp_Ez=zeros(3,1);
@@ -68,8 +68,8 @@ for tIn=3:1:Nt
         temp_Ez=left_ei\right_ei;
         
         Ez_all(:,ei,tIn)=temp_Ez(:,1);
-        %limit_slope_lin;
-        %Ez_all(1,463,tIn)=Ez_all(1,463,tIn)+E0*cos(omega*tnow); % Nr.463
+        limit_slope_lin;
+        Ez_all(1,465,tIn)=Ez_all(1,465,tIn)+E0*cos(omega*tnow); % Nr.463
         % calc field value of the element from the 3 nodal values weighted by Ni
         Ez_el(ei,tIn)=(1/(2*areatr))*(Ez_all(1,ei,tIn)*(a1+b1*cx+c1*cy)+Ez_all(2,ei,tIn)*(a2+b2*cx+c2*cy)+Ez_all(3,ei,tIn)*(a3+b3*cx+c3*cy));
     end
